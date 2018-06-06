@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.Design.Light">
+        <item name="android:colorPrimary">@android:color/white</item>
+        <item name="android:colorPrimaryDark">@color/peacock_maroon</item>
+        <item name="android:colorAccent">@color/peacock_blue</item>
+        <item name="coordinatorLayoutStyle">@style/Widget.Design.CoordinatorLayout</item>
+    </style>
+
+    <style name="AppTheme.ToolbarStyle" parent="Widget.AppCompat.Light.ActionBar">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:popupElevation">6dp</item>
+        <item name="colorControlNormal">@color/peacock_blue</item>
+        <item name="popupTheme">@style/AppTheme.ToolbarStyle.PopupMenu</item>
+        <item name="popupMenuStyle">@style/AppTheme.ToolbarStyle.PopupMenu</item>
+        <item name="titleMarginStart">32dp</item>
+    </style>
+
+    <style name="AppTheme.ToolbarStyle.TextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:text">@string/fragment_trending</item>
+        <item name="android:textColorPrimary">@color/text_major</item>
+        <item name="android:textColor">@color/text_major</item>
+        <item name="android:fontFamily">@font/font_kabel_regular</item>
+    </style>
+
+    <style name="AppTheme.ToolbarStyle.PopupMenu" parent="Widget.AppCompat.Light.PopupMenu">
+        <item name="android:actionMenuTextColor">@color/text_major</item>
+        <item name="android:textColor">@color/peacock_blue</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.CardView">
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="elevation">@dimen/card_regular_elevation</item>
+        <item name="android:layout_marginStart">@dimen/card_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/card_margin_end</item>
+        <item name="android:layout_marginTop">@dimen/card_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/card_margin_bottom</item>
+    </style>
+
+    <style name="AppTheme.Pill">
+        <item name="android:minWidth">@dimen/pill_min_width</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/pill_contents_padding_start</item>
+        <item name="android:paddingEnd">@dimen/pill_contents_padding_end</item>
+        <item name="android:paddingTop">@dimen/pill_contents_padding_top</item>
+        <item name="android:paddingBottom">@dimen/pill_contents_padding_bottom</item>
+        <item name="android:elevation">@dimen/pill_elevation</item>
+    </style>
+
+    <style name="AppTheme.Pill.Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/pill_text_size</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+</resources>

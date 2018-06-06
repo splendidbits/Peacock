@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peacock</string>
+
+    <string name="fragment_trending">Trending</string>
+    <string name="fragment_explore">Explore</string>
+    <string name="fragment_saved">Saved</string>
+    <string name="fragment_article">Article</string>
+
+    <string name="video">video</string>
+    <string name="featured">featured</string>
+    <string name="breaking">breaking</string>
+
+    <string name="video_mute_overlay">Tap for audio</string>
+
+</resources>

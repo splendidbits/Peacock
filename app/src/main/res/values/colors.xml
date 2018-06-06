@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="peacock_blue">#0089D0</color>
+    <color name="peacock_maroon">#CC004C</color>
+    <color name="peacock_orange">#F37021</color>
+    <color name="peacock_green">#0DB14B</color>
+    <color name="peacock_purple">#6460AA</color>
+    <color name="peacock_yellow">#FCB711</color>
+
+    <color name="navigation_control_active">@color/peacock_blue</color>
+    <color name="navigation_control_inactive">#949494</color>
+    <color name="text_major">#2F2F2F</color>
+    <color name="text_minor">#5A5A5A</color>
+    <color name="item_unselected">#A2A4A4</color>
+</resources>

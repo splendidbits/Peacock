@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            app:contentScrim="@color/peacock_blue"
+            app:toolbarId="@id/toolbar"
+            app:titleEnabled="false"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                tools:title="@string/fragment_trending"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbarSize"
+                android:theme="@style/AppTheme.ToolbarStyle"
+                app:popupTheme="@style/AppTheme.ToolbarStyle.PopupMenu"
+                app:titleTextAppearance="@style/AppTheme.ToolbarStyle.TextStyle"
+                app:layout_collapseMode="pin">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/toolbarLogo"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/toolbar_logo"/>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <fragment
+        tools:context=".activity.NewsActivity"
+        tools:layout="@layout/fragment_trending"
+        android:id="@+id/navHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_graph" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottomNavigationSize"
+        android:layout_gravity="bottom"
+        app:layout_scrollFlags="scroll"
+        app:layout_behavior="com.splendidbits.peacock.helpers.BottomNavigationBehavior"
+        app:layout_insetEdge="top"
+        android:background="@android:color/white"
+        app:itemIconTint="@drawable/navigation_item_color_state"
+        app:itemTextColor="@drawable/navigation_item_color_state"
+        android:elevation="@dimen/bottomNavigationElevation"
+        app:elevation="@dimen/bottomNavigationElevation"
+        app:menu="@menu/menu_bottom_navigation" />
+
+</android.support.design.widget.CoordinatorLayout>

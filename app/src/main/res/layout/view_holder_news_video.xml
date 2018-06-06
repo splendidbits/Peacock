@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    style="@style/AppTheme.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/imageGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="200dp" />
+
+        <com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+            android:id="@+id/videoPlayerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:resize_mode="fill"
+            app:surface_type="texture_view"
+            app:use_controller="false"
+            app:layout_constraintBottom_toTopOf="@+id/imageGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/videoPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/card_video_player_min_height"
+                app:resize_mode="zoom"
+                app:surface_type="texture_view"
+                app:use_controller="false" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/teaseImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="false"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <LinearLayout
+                android:id="@+id/videoVolumePill"
+                style="@style/AppTheme.Pill"
+                android:alpha="0.7"
+                android:elevation="0dp"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:background="@drawable/pill_background_white">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/AppTheme.Pill.Text"
+                    android:textColor="@color/text_major"
+                    android:layout_marginEnd="2dp"
+                    android:text="@string/video_mute_overlay"
+                    tools:text="@string/video_mute_overlay" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:tint="@color/text_major"
+                    android:tintMode="src_in"
+                    android:adjustViewBounds="false"
+                    app:srcCompat="@drawable/ic_icon_mute" />
+
+            </LinearLayout>
+
+        </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/headline"
+            android:textIsSelectable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:textAlignment="textStart"
+            android:textColor="@color/text_major"
+            android:textSize="18sp"
+            app:fontFamily="@font/font_noto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/videoPlayerContainer"
+            tools:text="North Korea cancels talks with South, casts doubt on" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/summary"
+            android:textIsSelectable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:maxLines="3"
+            android:singleLine="false"
+            android:textColor="@color/text_minor"
+            android:textSize="15sp"
+            app:fontFamily="@font/font_noto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headline"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="The regime believes drills between the South Korean and U.S. air forces are a rehearsal for an invasion of the North, the Yonhap news agency reported." />
+
+        <FrameLayout
+            style="@style/AppTheme.Pill"
+            android:layout_margin="16dp"
+            android:background="@drawable/pill_background_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/summary"
+            app:layout_constraintVertical_bias="0.0" >
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/AppTheme.Pill.Text"
+                android:text="@string/video" />
+
+        </FrameLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

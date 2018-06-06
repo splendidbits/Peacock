@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string translatable="false" name="trending_content_url">http://msgviewer.nbcnewstools.net:9207</string>
+    <string translatable="false" name="trending_date_format">"yyyy-MM-dd'T'HH:mm:ss'Z'"</string>
+</resources>
