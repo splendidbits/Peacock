@@ -5,7 +5,6 @@ import android.net.Uri
 import android.support.customtabs.CustomTabsIntent
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.splendidbits.peacock.R
 import com.splendidbits.peacock.enums.NewsType
 import com.splendidbits.peacock.model.NewsItem
 
@@ -23,7 +22,7 @@ abstract class AbstractNewsItemHolder(itemView: View) : RecyclerView.ViewHolder(
 
                 if (newsItem?.url?.isNotEmpty() ?: false) {
                     val customTabsIntent = CustomTabsIntent.Builder()
-                            .setToolbarColor(itemView.getResources().getColor(R.color.peacock_blue))
+                            .setToolbarColor(itemView.getResources().getColor(android.R.color.white))
                             .setShowTitle(true)
                             .build()
 
