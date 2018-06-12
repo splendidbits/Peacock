@@ -3,6 +3,7 @@ package com.splendidbits.peacock.view
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.view.View
+import com.splendidbits.peacock.helpers.getFirstVideoUrl
 import im.ene.toro.ToroPlayer
 import im.ene.toro.ToroUtil
 import im.ene.toro.exoplayer.Playable
@@ -10,12 +11,12 @@ import im.ene.toro.media.PlaybackInfo
 import im.ene.toro.widget.Container
 import kotlinx.android.synthetic.main.view_holder_news_video.view.*
 
+
 class NewsItemVideoHolder(itemView: View) : AbstractNewsItemHolder(itemView), ToroPlayer {
-    val teaseImage = itemView.teaseImage
-    val headlineText = itemView.headline
+    var pillText = itemView.videoVolumePill
     val summaryText = itemView.summary
+    val context = itemView.context
     var videoUri = Uri.EMPTY
-    var videoVolumePill = itemView.videoVolumePill
 
     private val videoPlayerContainer = itemView.videoPlayerContainer
     private val videoPlayer = itemView.videoPlayer
@@ -34,7 +35,14 @@ class NewsItemVideoHolder(itemView: View) : AbstractNewsItemHolder(itemView), To
     }
 
     override fun initialize(container: Container, playbackInfo: PlaybackInfo) {
-        if (exoPlayerHelper == null || exoPlayerHelper?.videoUri != videoUri) {
+        videoUri = Uri.parse(item?.assets?.getFirstVideoUrl())
+
+//        val bandwidthMeter = DefaultBandwidthMeter()
+//        val trackSelector = DefaultTrackSelector(bandwidthMeter)
+//        val loadControl = DefaultLoadControl()
+//        val player = ExoPlayerFactory.newSimpleInstance(context, trackSelector, loadControl)
+
+        if (exoPlayerHelper == null) {
             exoPlayerHelper = ExoPlayerViewHelper(this, videoUri)
         }
 
@@ -42,7 +50,7 @@ class NewsItemVideoHolder(itemView: View) : AbstractNewsItemHolder(itemView), To
         videoPlayerContainer.setOnClickListener {
             exoPlayerHelper?.volumeInfo?.isMute = false
             exoPlayerHelper?.volume = 1F
-            videoVolumePill.visibility = View.GONE
+            pillText.visibility = View.GONE
         }
 
         exoPlayerHelper?.removeEventListener(listener)

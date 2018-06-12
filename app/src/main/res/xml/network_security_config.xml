@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config>
-        <domain includeSubdomains="true">http://msgviewer.nbcnewstools.net:9207</domain>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">https://media1.s-nbcnews.com</domain>
+        <domain includeSubdomains="true">https://media2.s-nbcnews.com</domain>
+        <domain includeSubdomains="true">https://media3.s-nbcnews.com</domain>
+        <domain includeSubdomains="true">https://media4.s-nbcnews.com</domain>
+        <trust-anchors>
+            <certificates src="system"/>
+            <certificates src="user"/>
+        </trust-anchors>
+    </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">https://devicestransform-stg.elasticbeanstalk.com</domain>
+        <trust-anchors>
+            <certificates src="system"/>
+            <certificates src="user"/>
+        </trust-anchors>
+    </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">http://link.theplatform.com</domain>
+        <domain includeSubdomains="true">https://link.theplatform.com</domain>
         <trust-anchors>
             <certificates src="system"/>
             <certificates src="user"/>

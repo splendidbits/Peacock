@@ -5,11 +5,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 
 ext {
-    support_version = "27.1.1"
+    support_version = "28.0.0-alpha1"
     lifecycle_version = "1.1.1"
     room_version = "1.1.1-rc1"
+    nav_version = "1.0.0-alpha02"
     dagger_version = "2.16"
-    nav_version = "1.0.0-alpha01"
     retrofit_version = "2.4.0"
     toro_version = "3.5.2"
     stetho_version = "1.5.0"
@@ -27,20 +27,21 @@ buildscript {
 repositories {
     google()
     jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.0'
 
     defaultConfig {
         applicationId "com.splendidbits.peacock"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        versionCode = 4
-        versionName = '1.1.3'
+        versionCode = 6
+        versionName = '1.1.5'
 
-        compileSdkVersion 27
-        targetSdkVersion 27
+        compileSdkVersion 28
+        targetSdkVersion 28
         minSdkVersion 21
     }
 
@@ -93,8 +94,7 @@ android {
             shrinkResources false
             zipAlignEnabled true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-                    'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             applicationIdSuffix ".debug"
@@ -120,9 +120,16 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation "com.android.support:customtabs:${support_version}"
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+
+//    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+//    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
+//    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
     implementation "android.arch.lifecycle:livedata:${lifecycle_version}"
+
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
@@ -136,8 +143,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
+    implementation 'com.github.javiersantos:PiracyChecker:1.2.3'
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.github.mklimek:ssl-utils-android:1.0.1'
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.apache.commons:commons-lang3:3.6'
@@ -145,6 +154,7 @@ dependencies {
 
     implementation "im.ene.toro3:toro:${toro_version}"
     implementation "im.ene.toro3:toro-ext-exoplayer:${toro_version}"
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
 
     // Required for local unit tests (JUnit 4 framework)
     testImplementation 'junit:junit:4.12'

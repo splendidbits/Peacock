@@ -26,8 +26,8 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val url = arguments?.getString("itemId")
-        Log.d(ArticleFragment::class.java.simpleName, "Found itemId $url")
+        val url = arguments?.getString("externalId")
+        Log.d(ArticleFragment::class.java.simpleName, "Found externalId $url")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -8,34 +8,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.splendidbits.peacock.R
-import com.splendidbits.peacock.enums.NewsType
-import com.splendidbits.peacock.model.NewsItem
+import com.splendidbits.peacock.enums.ImageSize
+import com.splendidbits.peacock.helpers.*
+import com.splendidbits.peacock.model.Item
 import com.splendidbits.peacock.view.AbstractNewsItemHolder
 import com.splendidbits.peacock.view.NewsItemArticleHolder
 import com.splendidbits.peacock.view.NewsItemFeaturedHolder
 import com.splendidbits.peacock.view.NewsItemVideoHolder
 import com.squareup.picasso.Picasso
 
-class TrendingRecyclerAdapter(val context: Context, private val picassoBuilder: Picasso.Builder) :
-        ListAdapter<NewsItem, AbstractNewsItemHolder>(diffCallback) {
+class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso) :
+        ListAdapter<Item, AbstractNewsItemHolder>(diffCallback) {
+    private val TYPE_ARTICLE: Int = 1
+    private val TYPE_VIDEO: Int = 2
+    private val TYPE_FEATURED: Int = 3
+    private val imageHelper = ImageHelper()
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<NewsItem>() {
-            override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean =
+        private val diffCallback = object : DiffUtil.ItemCallback<Item>() {
+            override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean =
                     oldItem.itemId == newItem.itemId
 
-            override fun areContentsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean =
+            override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean =
                     oldItem == newItem
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractNewsItemHolder {
         when (viewType) {
-            NewsType.TYPE_FEATURED.ordinal -> {
+            TYPE_FEATURED -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_news_featured, parent, false)
                 return NewsItemFeaturedHolder(itemView)
             }
-            NewsType.TYPE_VIDEO.ordinal -> {
+            TYPE_VIDEO -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_news_video, parent, false)
                 return NewsItemVideoHolder(itemView)
             }
@@ -47,68 +52,67 @@ class TrendingRecyclerAdapter(val context: Context, private val picassoBuilder: 
     }
 
     override fun getItemId(position: Int): Long {
-        return getItem(position).itemId.hashCode().toLong()
+        return getItem(position).externalId.hashCode().toLong()
     }
 
     override fun getItemViewType(position: Int): Int {
-        return getItem(position).type.ordinal
+        return if (getItem(position)?.featured ?: false) {
+            TYPE_FEATURED
+        } else if (getItem(position)?.hasVideo() ?: false) {
+            TYPE_VIDEO
+        } else {
+            TYPE_ARTICLE
+        }
     }
 
     override fun onBindViewHolder(viewHolder: AbstractNewsItemHolder, position: Int) {
         val item = getItem(position)
-        viewHolder.newsItem = item
+        viewHolder.item = item
 
-        when (viewHolder) {
-            is NewsItemFeaturedHolder -> {
-                if (item.tease.isNotEmpty()) {
-                    picassoBuilder
-                            .build()
-                            .load(item.tease)
-                            .priority(Picasso.Priority.HIGH)
-                            .placeholder(R.drawable.tease_rect_placeholder)
-                            .fit()
-                            .centerCrop()
-                            .into(viewHolder.teaseImage)
-                }
-                viewHolder.headlineText.text = item.headline
-                viewHolder.summaryText.text = item.summary
-                viewHolder.pillText.text = if (item.breaking)
-                    context.getString(R.string.breaking) else context.getString(R.string.breaking)
-            }
+        val heroImageUrl = imageHelper.getImageUrl(item.assets.getFirstImageUrl()?: "", ImageSize.HERO)
+        val thumbImageUrl = imageHelper.getImageUrl(item.assets.getFirstImageUrl()?: "", ImageSize.THUMBNAIL)
 
-            is NewsItemArticleHolder -> {
-                if (item.tease.isNotEmpty()) {
-                    picassoBuilder
-                            .build()
-                            .load(item.tease)
-                            .priority(Picasso.Priority.NORMAL)
-                            .placeholder(R.drawable.tease_square_placeholder)
-                            .fit()
-                            .centerCrop()
-                            .into(viewHolder.teaseImage)
-                }
+        if (viewHolder is NewsItemFeaturedHolder) {
+            viewHolder.pillText.text = context.getString(R.string.breaking)
+            viewHolder.headlineText.text = item.title
+            viewHolder.summaryText.text = item.summary
 
-                viewHolder.headlineText.text = item.headline
-            }
-
-            is NewsItemVideoHolder -> {
-                if (item.tease.isNotEmpty()) {
-                    picassoBuilder
-                            .build()
-                            .load(item.tease)
-                            .priority(Picasso.Priority.HIGH)
-                            .placeholder(R.drawable.tease_rect_placeholder)
-                            .fit()
-                            .centerCrop()
-                            .into(viewHolder.teaseImage)
-                }
-
-                viewHolder.summaryText.text = item.summary
-                viewHolder.headlineText.text = item.headline
-                viewHolder.videoUri = Uri.parse(item.videoPreviewUrl)
-                viewHolder.videoVolumePill.visibility = View.VISIBLE
+            if (item.hasImage()) {
+                picasso.load(heroImageUrl)
+                        .placeholder(R.drawable.tease_rect_placeholder)
+                        .fit()
+                        .centerCrop()
+                        .into(viewHolder.teaseImage)
             }
         }
+
+        if (viewHolder is NewsItemVideoHolder) {
+            if (item.hasVideo()) {
+                viewHolder.videoUri = Uri.parse(item.assets.getFirstVideoUrl())
+            }
+            viewHolder.pillText.visibility = View.VISIBLE
+            viewHolder.summaryText.text = item.summary
+
+            if (item.hasImage()) {
+                picasso.load(heroImageUrl)
+                        .placeholder(R.drawable.tease_rect_placeholder)
+                        .fit()
+                        .centerCrop()
+                        .into(viewHolder.teaseImage)
+            }
+        }
+
+        if (viewHolder is NewsItemArticleHolder) {
+            if (item.hasImage()) {
+                picasso.load(thumbImageUrl)
+                        .placeholder(R.drawable.tease_square_placeholder)
+                        .fit()
+                        .centerCrop()
+                        .into(viewHolder.teaseImage)
+            }
+        }
+
+        viewHolder.headlineText.text = item.title
     }
 
     override fun setHasStableIds(hasStableIds: Boolean) {

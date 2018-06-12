@@ -25,7 +25,7 @@ class ApplicationModule(private var application: PeacockApplication) {
     }
 
     @Provides
-    fun provideRecyclerAdapter(context: Context, picassoBuilder: Picasso.Builder): TrendingRecyclerAdapter {
-        return TrendingRecyclerAdapter(context, picassoBuilder)
+    fun provideRecyclerAdapter(context: Context, picasso: Picasso): TrendingRecyclerAdapter {
+        return TrendingRecyclerAdapter(context, picasso)
     }
 }

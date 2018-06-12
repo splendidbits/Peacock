@@ -1,12 +1,17 @@
 package com.splendidbits.peacock.service
 
-import com.splendidbits.peacock.model.TrendingBatch
+import com.splendidbits.peacock.model.Batch
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 
 interface RemoteApiService {
-    @GET("/v1/query/curation/news/")
-    fun getTrendingStories(@Query("size") resultSize: Int = 30): Call<TrendingBatch>
+    @GET("/portal/latest")
+    fun getLatestItems(@Query("server") server: String = "prod",
+                       @Query("mergetype") mergeType: String = "beta",
+                       @Query("_devicefeed_") deviceFeed: String = "cover"): Call<Batch>
+
+    @GET("/portal/cover/merged")
+    fun getCoverItems(): Call<Batch>
 }
