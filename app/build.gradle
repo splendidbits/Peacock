@@ -37,8 +37,8 @@ android {
     defaultConfig {
         applicationId "com.splendidbits.peacock"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        versionCode = 9
-        versionName = "1.1.8"
+        versionCode = 10
+        versionName = "1.1.10"
 
         compileSdkVersion 28
         targetSdkVersion 28
@@ -157,6 +157,7 @@ dependencies {
     implementation "com.google.android.exoplayer:exoplayer:2.7.3"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
     // Required for local unit tests (JUnit 4 framework)
     testImplementation "junit:junit:4.12"

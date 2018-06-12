@@ -1,6 +1,35 @@
+-printmapping build/mapping.txt
+-printseeds build/classes-processed.seeds
+
+# Reduce the size of the output some more.
+-repackageclasses ''
+-allowaccessmodification
+
+# Preserve annotated Javascript interface methods.
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+
 # Annotations
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
+
+# Kotlin
+-keep class kotlin.** { *; }
+-dontwarn kotlin.**
+-keep class kotlin.Metadata { *; }
+-keepclassmembers class **$WhenMappings {
+    <fields>;
+}
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+}
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+}
 
 # OkHttp and Okio
 -dontwarn okhttp3.**
@@ -78,6 +107,20 @@
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
 }
+
+# PiracyChecker
+# Lib
+-keep class com.github.javiersantos.**
+-dontwarn com.github.javiersantos.**
+# LVL
+-keep class com.google.**
+-keep class autovalue.shaded.com.google.**
+-keep class com.android.vending.billing.**
+-keep public class com.android.vending.licensing.ILicensingService
+-dontwarn org.apache.**
+-dontwarn com.google.**
+-dontwarn autovalue.shaded.com.google.**
+-dontwarn com.android.vending.billing.**
 
 # Peacock code TODO remove
 -keep class * extends androidx.appcompat.app.AppCompatActivity
