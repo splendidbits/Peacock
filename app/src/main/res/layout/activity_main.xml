@@ -65,7 +65,7 @@
         android:layout_height="@dimen/bottomNavigationSize"
         android:layout_gravity="bottom"
         app:layout_scrollFlags="scroll"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_behavior="com.splendidbits.peacock.helper.BottomNavigationBehavior"
         app:layout_insetEdge="top"
         android:background="@android:color/white"
         app:itemIconTint="@drawable/navigation_item_color_state"
