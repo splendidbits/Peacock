@@ -1,10 +1,11 @@
 package com.splendidbits.peacock.main
 
-import android.support.multidex.MultiDexApplication
+import android.app.Application
+import androidx.multidex.MultiDex
 import com.splendidbits.peacock.injection.*
 
 
-class PeacockApplication : MultiDexApplication() {
+class PeacockApplication : Application() {
     companion object {
         @JvmStatic
         lateinit var graph: AppComponent
@@ -12,6 +13,8 @@ class PeacockApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this)
+
         graph = DaggerAppComponent
                 .builder()
                 .componentModule(ComponentModule())

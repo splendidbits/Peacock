@@ -1,7 +1,7 @@
 package com.splendidbits.peacock.service
 
-import android.arch.lifecycle.LiveData
 import android.util.Log
+import androidx.lifecycle.LiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

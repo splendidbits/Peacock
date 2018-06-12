@@ -16,15 +16,13 @@ import javax.inject.Singleton
 import javax.net.ssl.SSLSession
 
 
-
-
 @Module
 class ComponentModule {
     private val userAgent = "peacock/${BuildConfig.VERSION_NAME}"
 
     @Provides
     @Singleton
-    fun provideOkHttpBuilder(context: Context): OkHttpClient.Builder {
+    fun provideOkHttpBuilder(): OkHttpClient.Builder {
         return OkHttpClient()
                 .newBuilder()
                 .followRedirects(true)

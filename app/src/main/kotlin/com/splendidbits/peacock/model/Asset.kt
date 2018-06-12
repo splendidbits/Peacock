@@ -1,7 +1,7 @@
 package com.splendidbits.peacock.model
 
-import android.arch.persistence.room.Entity
 import android.os.Parcelable
+import androidx.room.Entity
 import com.splendidbits.peacock.enums.AssetType
 import kotlinx.android.parcel.Parcelize
 import org.apache.commons.lang3.StringUtils

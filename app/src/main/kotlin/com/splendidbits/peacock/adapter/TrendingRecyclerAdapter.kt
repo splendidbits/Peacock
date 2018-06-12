@@ -2,13 +2,13 @@ package com.splendidbits.peacock.adapter
 
 import android.content.Context
 import android.net.Uri
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.splendidbits.peacock.R
-import com.splendidbits.peacock.helpers.*
+import com.splendidbits.peacock.helper.*
 import com.splendidbits.peacock.model.Item
 import com.splendidbits.peacock.view.AbstractNewsItemHolder
 import com.splendidbits.peacock.view.NewsItemArticleHolder

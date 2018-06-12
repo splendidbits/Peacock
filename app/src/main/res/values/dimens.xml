@@ -9,7 +9,7 @@
     <dimen name="card_margin_top">8dp</dimen>
     <dimen name="card_margin_bottom">8dp</dimen>
 
-    <dimen name="card_regular_elevation">1.5dp</dimen>
+    <dimen name="card_regular_elevation">1dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_minimum_height">100dp</dimen>
     <dimen name="card_video_player_min_height">200dp</dimen>

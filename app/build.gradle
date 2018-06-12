@@ -1,13 +1,13 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs"
 
 ext {
-    support_version = "28.0.0-alpha1"
-    lifecycle_version = "1.1.1"
-    room_version = "1.1.1-rc1"
+    androidx_version = "1.0.0-alpha3"
+    lifecycle_version = "2.0.0-alpha1"
+    room_version = "2.0.0-alpha1"
     nav_version = "1.0.0-alpha02"
     dagger_version = "2.16"
     retrofit_version = "2.4.0"
@@ -32,13 +32,13 @@ repositories {
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.0'
+    buildToolsVersion "28.0.0"
 
     defaultConfig {
         applicationId "com.splendidbits.peacock"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
         versionCode = 7
-        versionName = '1.1.6'
+        versionName = "1.1.6"
 
         compileSdkVersion 28
         targetSdkVersion 28
@@ -53,10 +53,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias 'peacock'
-            keyPassword 'peacock'
-            storeFile file('../peacock.keystore')
-            storePassword 'bg8j7tZ5'
+            keyAlias "peacock"
+            keyPassword "peacock"
+            storeFile file("../peacock.keystore")
+            storePassword "bg8j7tZ5"
         }
         debug {
         }
@@ -67,12 +67,12 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
+        main.java.srcDirs += "src/main/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
     }
 
     packagingOptions {
-        exclude 'META-INF/rxjava.properties'
+        exclude "META-INF/rxjava.properties"
     }
 
     testOptions {
@@ -91,10 +91,10 @@ android {
         release {
             signingConfig signingConfigs.release
             debuggable false
-            shrinkResources false
+            shrinkResources true
             zipAlignEnabled true
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         debug {
             applicationIdSuffix ".debug"
@@ -107,58 +107,63 @@ android {
     }
 }
 
+configurations {
+    implementation {
+        //exclude group: "androidx.recyclerview", module: "recyclerview"
+        //exclude group: "androidx.core.os", module: "ResultReceiver"
+    }
+}
+
 dependencies {
-    implementation fileTree(include: '*.jar', dir: 'libs')
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation "com.android.support:support-annotations:${support_version}"
-    //noinspection GradleCompatible
-    implementation "com.android.support:appcompat-v7:${support_version}"
-    implementation "com.android.support:support-v4:${support_version}"
-    implementation "com.android.support:design:${support_version}"
-    implementation "com.android.support:recyclerview-v7:${support_version}"
-    implementation "com.android.support:cardview-v7:${support_version}"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation "com.android.support:customtabs:${support_version}"
+    implementation fileTree(include: "*.jar", dir: "libs")
+    implementation "androidx.multidex:multidex:2.0.0"
+    implementation "com.google.android.material:material:${androidx_version}"
+    implementation "androidx.annotation:annotation:${androidx_version}"
+    implementation "androidx.appcompat:appcompat:${androidx_version}"
+    implementation "androidx.recyclerview:recyclerview:${androidx_version}"
+    implementation "androidx.browser:browser:${androidx_version}"
+    implementation "androidx.legacy:legacy-support-v4:${androidx_version}"
+    implementation "androidx.constraintlayout:constraintlayout:1.1.2"
+    implementation "androidx.constraintlayout:constraintlayout-solver:1.1.2"
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    implementation "androidx.lifecycle:lifecycle-livedata:${lifecycle_version}"
 
-//    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-//    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
-//    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
-    implementation "android.arch.lifecycle:livedata:${lifecycle_version}"
+    implementation "androidx.room:room-common:${room_version}"
+    kapt "androidx.room:room-compiler:${room_version}"
+    implementation "androidx.room:room-rxjava2:${room_version}"
+    implementation "androidx.room:room-migration:${room_version}"
 
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
-    implementation "android.arch.persistence.room:rxjava2:$room_version"
-
-    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-fragment-ktx:${nav_version}"
+    implementation "android.arch.navigation:navigation-ui-ktx:${nav_version}"
 
     implementation "com.google.dagger:dagger:${dagger_version}"
     kapt "com.google.dagger:dagger-compiler:${dagger_version}"
 
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.14"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    implementation 'com.github.javiersantos:PiracyChecker:1.2.3'
-    implementation 'com.google.code.gson:gson:2.8.4'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.github.mklimek:ssl-utils-android:1.0.1'
-    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'org.apache.commons:commons-lang3:3.6'
-    implementation 'commons-io:commons-io:2.6'
+    implementation "com.github.javiersantos:PiracyChecker:1.2.3"
+    implementation "com.google.code.gson:gson:2.8.4"
+    implementation "com.squareup.okhttp3:okhttp:3.10.0"
+    implementation "com.github.mklimek:ssl-utils-android:1.0.1"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0"
+    implementation "com.squareup.picasso:picasso:2.71828"
+    implementation "org.apache.commons:commons-lang3:3.6"
+    implementation "commons-io:commons-io:2.6"
 
     implementation "im.ene.toro3:toro:${toro_version}"
     implementation "im.ene.toro3:toro-ext-exoplayer:${toro_version}"
-    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+    implementation "com.google.android.exoplayer:exoplayer:2.7.3"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
 
     // Required for local unit tests (JUnit 4 framework)
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:4.12"
 
     // Required for instrumented tests
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation "androidx.test:runner:1.1.0-alpha3"
+    androidTestImplementation "androidx.test:monitor:1.1.0-alpha3"
 }

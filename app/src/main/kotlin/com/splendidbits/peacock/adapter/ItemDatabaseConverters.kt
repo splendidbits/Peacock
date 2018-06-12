@@ -1,11 +1,10 @@
 package com.splendidbits.peacock.adapter
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import com.splendidbits.peacock.enums.AssetType
 import com.splendidbits.peacock.enums.ItemType
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class ItemDatabaseConverters {
     // It's not worth injecting this WITH a context just for the string. Revisit?

@@ -1,7 +1,7 @@
 package com.splendidbits.peacock.injection
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.mklimek.sslutilsandroid.SslUtils
 import com.splendidbits.peacock.dao.ArticlesDao
 import com.splendidbits.peacock.dao.NewsRepository
@@ -11,7 +11,6 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 import javax.net.ssl.SSLSession
-
 
 @Module
 class DataModule {
@@ -34,7 +33,7 @@ class DataModule {
 
         okHttpClientBuilder
                 .sslSocketFactory(feedSslContext.getSocketFactory())
-                .hostnameVerifier({ url: String, session: SSLSession ->
+                .hostnameVerifier({ _: String, session: SSLSession ->
                     session.peerHost.contains("devicestransform-stg.elasticbeanstalk.com")
                 })
 

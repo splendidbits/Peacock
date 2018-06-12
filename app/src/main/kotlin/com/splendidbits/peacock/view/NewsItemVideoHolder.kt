@@ -3,7 +3,7 @@ package com.splendidbits.peacock.view
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.view.View
-import com.splendidbits.peacock.helpers.getFirstVideoUrl
+import com.splendidbits.peacock.helper.getFirstVideoUrl
 import im.ene.toro.ToroPlayer
 import im.ene.toro.ToroUtil
 import im.ene.toro.exoplayer.Playable

@@ -1,4 +1,4 @@
-package com.splendidbits.peacock.helpers
+package com.splendidbits.peacock.helper
 
 import com.splendidbits.peacock.enums.AssetType
 import com.splendidbits.peacock.enums.ImageSize

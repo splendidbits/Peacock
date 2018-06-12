@@ -2,15 +2,12 @@ package com.splendidbits.peacock.fragment
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.support.customtabs.CustomTabsIntent
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.splendidbits.peacock.R
 import com.splendidbits.peacock.main.PeacockApplication
 
@@ -34,17 +31,11 @@ class ArticleFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (visitedArticle) {
-            findNavController().navigateUp()
+//            findNavController().navigateUp()
         }
     }
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
-
-        if (arguments != null && arguments?.containsKey("url")!!) {
-            val builder = CustomTabsIntent.Builder()
-            val customTabsIntent = builder.build()
-            customTabsIntent.launchUrl(getActivity(), Uri.parse(arguments?.getString("url")))
-        }
     }
 }

@@ -1,14 +1,14 @@
 package com.splendidbits.peacock.dao
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Transformations
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
 import com.google.gson.GsonBuilder
 import com.splendidbits.peacock.R
 import com.splendidbits.peacock.adapter.NewsItemsDeserializer
-import com.splendidbits.peacock.helpers.map
+import com.splendidbits.peacock.helper.map
 import com.splendidbits.peacock.model.Batch
 import com.splendidbits.peacock.service.RemoteApiService
 import com.splendidbits.peacock.service.RetrofitLiveData

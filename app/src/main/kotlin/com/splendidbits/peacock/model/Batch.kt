@@ -1,9 +1,9 @@
 package com.splendidbits.peacock.model
 
-import android.arch.lifecycle.ViewModel
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
 import android.os.Parcelable
+import androidx.lifecycle.ViewModel
+import androidx.room.Entity
+import androidx.room.Ignore
 import kotlinx.android.parcel.Parcelize
 import org.apache.commons.lang3.StringUtils
 import java.util.*
