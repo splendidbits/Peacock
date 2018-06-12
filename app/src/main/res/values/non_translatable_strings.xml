@@ -3,4 +3,6 @@
     <string translatable="false" name="latest_feed_url">https://devicestransform-stg.elasticbeanstalk.com</string>
     <string translatable="false" name="latest_feed_images_url">s-nbcnews.com</string>
     <string translatable="false" name="latest_feed_date_format">"yyyy-MM-dd'T'HH:mm:ss'Z'"</string>
+    <string translatable="false" name="app_licensing_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAobC8L7bdBon4WHLVr3klPDdNxIGtEfYRzuzyEIR5hDSTVPTNF6wMwpR1TET7ftrWIaf0N8ZQm1M926aNJR+QTnceeMt2ppFJLBDySbVOQOSYcWVwiWvVwGfNfkqjvHAn9PrG1PxyCmgWPZIYkP100wySNQwtsfGOm2U9lbN/BdrmoiUc84WxnYe1q40lB0kgOwWk0Lxd9hOtRQMMiWY4PsGJqTLJTkKM4qDfv8ESxS0l6rS3cYdqNDKhCdcjmtwVJd/bYFMZKJGmQZ72ZPoxDFsNcW71rQfCjj0PETgiWu0S1hFHmLfC9+cwmSr7OEtaIHubO1CgvZ03WydVWQdEywIDAQAB</string>
+    <string translatable="false" name="shared_preferences_secure">peacock_preferences_secure</string>
 </resources>

@@ -6,8 +6,8 @@ import com.splendidbits.peacock.injection.*
 
 class PeacockApplication : MultiDexApplication() {
     companion object {
-        //platformStatic allow access it from java code
-        @JvmStatic lateinit var graph: AppComponent
+        @JvmStatic
+        lateinit var graph: AppComponent
     }
 
     override fun onCreate() {
