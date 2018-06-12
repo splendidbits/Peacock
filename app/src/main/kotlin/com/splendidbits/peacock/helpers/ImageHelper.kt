@@ -5,8 +5,8 @@ import com.splendidbits.peacock.enums.ResizeMode
 import org.apache.commons.lang3.StringUtils
 
 private const val REGEX_EXTENDED_ATTRIBUTES: String = "\\.(([0-9]){2,};([0-9]){2,};([0-7]){1,};([0-9]){1,3};([0-5]){1,1}\\.\\w{3,3}|([0-9]){2,}%3[B]([0-9]){2,}%3[B]([0-7]){1,}%3[B]([0-9]){1,3}%3[B]([0-5]){1,1}\\.\\w{3,})"
-private const val DOMAIN_ORIGINAL: String = "s-nbcnews.com/i/"
-private const val DOMAIN_RESIZABLE: String = "s-nbcnews.com/j/"
+const val DOMAIN_ORIGINAL: String = "s-nbcnews.com/i/"
+const val DOMAIN_RESIZABLE: String = "s-nbcnews.com/j/"
 private const val FOCAL_ATTRIBUTES_EXTENSION: String = ".focal-1000x500"
 
 class ImageHelper {

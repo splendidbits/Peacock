@@ -13,5 +13,7 @@ interface RemoteApiService {
                        @Query("_devicefeed_") deviceFeed: String = "cover"): Call<Batch>
 
     @GET("/portal/cover/merged")
-    fun getCoverItems(): Call<Batch>
+    fun getCoverItems(@Query("server") server: String = "prod",
+                      @Query("mergetype") mergeType: String = "beta",
+                      @Query("_devicefeed_") deviceFeed: String = "cover"): Call<Batch>
 }

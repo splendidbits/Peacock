@@ -1,8 +1,10 @@
 package com.splendidbits.peacock.helpers
 
 import com.splendidbits.peacock.enums.AssetType
+import com.splendidbits.peacock.enums.ImageSize
 import com.splendidbits.peacock.model.Asset
 import com.splendidbits.peacock.model.Item
+import org.apache.commons.lang3.StringUtils
 
 fun Item.hasImage(): Boolean {
     return assets.getFirstImageUrl() != null
@@ -15,6 +17,45 @@ fun Item.hasVideo(): Boolean {
 fun List<Asset>.getFirstImageUrl(): String? {
     forEach({ if (it.type == AssetType.TYPE_IMAGE && it.url.isNotEmpty()) return it.url })
     return null
+}
+
+fun List<Asset>.getHeroImage(): String? {
+    val imageHelper = ImageHelper()
+    forEach({ asset ->
+        if (asset.type == AssetType.TYPE_IMAGE && asset.url.isNotEmpty()) {
+            if (asset.url.toLowerCase().endsWith("1920x1080.jpg")) {
+                return asset.url
+            } else {
+                return imageHelper.getImageUrl(asset.url, ImageSize.HERO)
+            }
+        }
+    })
+    return null
+}
+
+fun List<Asset>.getThumbnailImage(): String? {
+    val imageHelper = ImageHelper()
+    var staticImage: String = StringUtils.EMPTY
+    var thumbImage: String = StringUtils.EMPTY
+
+    for (asset in this) {
+        if (asset.type == AssetType.TYPE_IMAGE && asset.url.isNotEmpty()) {
+            if (asset.url.toLowerCase().contains("video")) {
+                staticImage = asset.url
+            } else {
+                thumbImage = imageHelper.getImageUrl(asset.url, ImageSize.THUMBNAIL)
+            }
+            break
+        }
+    }
+
+    return if (thumbImage.isNotEmpty()) {
+        thumbImage
+    } else if (staticImage.isNotEmpty()) {
+        staticImage
+    } else {
+        null
+    }
 }
 
 fun List<Asset>.getFirstVideoUrl(): String? {

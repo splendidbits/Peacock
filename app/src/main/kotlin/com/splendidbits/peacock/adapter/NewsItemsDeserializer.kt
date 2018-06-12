@@ -116,9 +116,60 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
         })
 
         if (firstBreakingItem != firstRegularItem) {
-            Collections.swap(batch.items, firstRegularItem, firstRegularItem)
+            Collections.swap(batch.items, firstRegularItem, firstBreakingItem)
         }
         return batch
+    }
+
+    private fun getAssets(jsonItem: JsonObject, newsItem: Item, defaultDate: Calendar): List<Asset> {
+        val mediaAssets = mutableListOf<Asset>()
+
+        if (jsonItem.string("contentSrc").isNotEmpty() && jsonItem.string("videoDuration").isNotEmpty()) {
+            val asset = getAsset(jsonItem, defaultDate)
+            asset?.assetId = if (newsItem.externalId.isNotEmpty()) newsItem.externalId else newsItem.itemId
+            asset?.type = AssetType.TYPE_VIDEO
+            asset?.duration = jsonItem.string("videoDuration")
+            asset?.url = jsonItem.string("contentSrc").replace("http://", "https://")
+
+            if (asset != null && newsItem.assets.none { it.assetId == asset.assetId }) {
+                mediaAssets += asset
+            }
+        }
+
+        val jsonCoverArt = jsonItem.get("coverArt")
+        if (jsonCoverArt is JsonObject && jsonCoverArt.has("url")) {
+            val asset = getAsset(jsonCoverArt, defaultDate)
+
+            if (asset != null && asset.url.isNotEmpty()) {
+                asset.type = AssetType.TYPE_IMAGE
+                mediaAssets += asset
+            }
+        }
+
+        val jsonMainArt = jsonItem.get("mainArt")
+        if (jsonMainArt is JsonObject && jsonMainArt.has("url")) {
+            val asset = getAsset(jsonMainArt, defaultDate)
+
+            if (asset != null && asset.url.isNotEmpty()) {
+                asset.type = AssetType.TYPE_IMAGE
+                mediaAssets += asset
+            }
+        }
+
+        val jsonMediaList = jsonItem.get("mediaList")
+        if (jsonMediaList is JsonArray) {
+            for ((assetIndex, jsonMedia) in jsonMediaList.withIndex()) {
+                Log.d(this::class.java.simpleName, "Found asset index $assetIndex")
+
+                if (jsonMedia is JsonObject && jsonMedia.string("type").toLowerCase() == "image") {
+                    val asset = getAsset(jsonMedia, defaultDate)
+                    if (asset != null && newsItem.assets.none { it.assetId == asset.assetId }) {
+                        mediaAssets += asset
+                    }
+                }
+            }
+        }
+        return mediaAssets
     }
 
     private fun getAsset(jsonObject: JsonObject, defaultDate: Calendar): Asset? {
@@ -137,66 +188,6 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
             asset.url = jsonObject.string("url")
         }
         return asset
-    }
-
-    private fun getAssets(jsonItem: JsonObject, newsItem: Item, defaultDate: Calendar): List<Asset> {
-        val mediaAssets = mutableListOf<Asset>()
-
-        if (jsonItem.string("contentSrc").isNotEmpty() && jsonItem.string("videoDuration").isNotEmpty()) {
-            val asset = getAsset(jsonItem, defaultDate)
-            asset?.assetId = if (newsItem.externalId.isNotEmpty()) newsItem.externalId else newsItem.itemId
-            asset?.duration = jsonItem.string("videoDuration")
-            asset?.type = AssetType.TYPE_VIDEO
-            asset?.duration = jsonItem.string("videoDuration")
-            asset?.url = jsonItem.string("contentSrc").replace("http://", "https://")
-
-            if (asset != null && newsItem.assets.none { it.assetId == asset.assetId }) {
-                mediaAssets.add(asset)
-            }
-        }
-
-        if (jsonItem.string("coverArt").isNotEmpty()) {
-            val asset = getAsset(jsonItem, defaultDate)
-
-            if (asset != null && asset.url.isNotEmpty()) {
-                asset.type = AssetType.TYPE_IMAGE
-                mediaAssets.add(asset)
-            }
-        }
-
-        if (jsonItem.string("mainArt").isNotEmpty()) {
-            val asset = getAsset(jsonItem, defaultDate)
-
-            if (asset != null && asset.url.isNotEmpty()) {
-                asset.type = AssetType.TYPE_IMAGE
-                mediaAssets.add(asset)
-            }
-        }
-
-        val jsonMediaList = jsonItem.get("mediaList")?.asJsonArray() ?: JsonArray()
-        for ((assetIndex, jsonMedia) in jsonMediaList.withIndex()) {
-            Log.d(this::class.java.simpleName, "Found asset index $assetIndex")
-
-            if (jsonMedia is JsonObject && jsonMedia.string("type").toLowerCase() == "image") {
-                val asset = getAsset(jsonMedia, defaultDate)
-                if (asset != null && newsItem.assets.none { it.assetId == asset.assetId }) {
-                    mediaAssets.add(asset)
-                }
-            }
-        }
-
-        for (mediaAsset in mediaAssets) {
-            if (mediaAsset.width != 0 && mediaAsset.height != 0 && mediaAsset.url.isNotEmpty()) {
-                val asset = getAsset(jsonItem, defaultDate)
-
-                if (asset != null && asset.url.isNotEmpty()) {
-                    asset.type = AssetType.TYPE_IMAGE
-                    mediaAssets.add(0, asset)
-                    break
-                }
-            }
-        }
-        return mediaAssets
     }
 
     private fun parseDate(dateString: String?, defaultDate: Calendar): Calendar {

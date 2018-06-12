@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.splendidbits.peacock.R
-import com.splendidbits.peacock.enums.ImageSize
 import com.splendidbits.peacock.helpers.*
 import com.splendidbits.peacock.model.Item
 import com.splendidbits.peacock.view.AbstractNewsItemHolder
@@ -69,8 +68,8 @@ class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso
         val item = getItem(position)
         viewHolder.item = item
 
-        val heroImageUrl = imageHelper.getImageUrl(item.assets.getFirstImageUrl()?: "", ImageSize.HERO)
-        val thumbImageUrl = imageHelper.getImageUrl(item.assets.getFirstImageUrl()?: "", ImageSize.THUMBNAIL)
+        val heroImageUrl = item.assets.getHeroImage()
+        val thumbImageUrl = item.assets.getThumbnailImage()
 
         if (viewHolder is NewsItemFeaturedHolder) {
             viewHolder.pillText.text = context.getString(R.string.breaking)
