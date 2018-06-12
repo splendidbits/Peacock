@@ -73,12 +73,14 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
                 newsItem.published = parseDate(jsonItem.string("published"), defaultDate)
                 newsItem.publishedFirst = parseDate(jsonItem.string("published_first"), defaultDate)
 
-                if (newsItem.breaking && firstBreakingItem > 0) {
+                if (newsItem.breaking && firstBreakingItem != -1) {
                     firstBreakingItem = itemIndex
-                } else if (!newsItem.breaking && firstRegularItem > 0) {
+
+                } else if (!newsItem.breaking && firstRegularItem != -1) {
                     firstRegularItem = itemIndex
                 }
 
+                // Parse tags
                 val jsonTags = jsonItem.get("tags")?.asJsonArray() ?: JsonArray()
                 for ((tagIndex, jsonTag) in jsonTags.withIndex()) {
                     Log.d(this::class.java.simpleName, "Found tag index $tagIndex")
@@ -93,8 +95,8 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
                     }
                 }
 
+                // Parse assets
                 newsItem.assets = getAssets(jsonItem, newsItem, defaultDate)
-
                 if (!batch.items.contains(newsItem)) {
                     batch.items += newsItem
                 }
@@ -114,14 +116,19 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
             }
         })
 
-        if (firstBreakingItem != -1 &&
-                firstRegularItem != -1 &&
-                firstBreakingItem != firstRegularItem) {
-            Collections.swap(batch.items, firstRegularItem, firstBreakingItem)
+        // Always make the first item 'featured', either by breaking news or artificially
+        if (batch.items.isNotEmpty()) {
+            if (firstBreakingItem != -1 &&
+                    firstRegularItem != -1 &&
+                    firstBreakingItem != firstRegularItem &&
+                    firstBreakingItem != 0) {
+                Collections.swap(batch.items, firstRegularItem, firstBreakingItem)
 
-        } else if (batch.items.isNotEmpty()) {
-            batch.items[0].featured = true
+            } else if (firstBreakingItem != -1 && firstRegularItem != -1) {
+                batch.items[0].featured = true
+            }
         }
+
         return batch
     }
 

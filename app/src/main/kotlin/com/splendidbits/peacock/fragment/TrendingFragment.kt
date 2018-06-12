@@ -12,22 +12,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.splendidbits.peacock.R
 import com.splendidbits.peacock.adapter.TrendingRecyclerAdapter
 import com.splendidbits.peacock.dao.NewsRepository
 import com.splendidbits.peacock.main.PeacockApplication
 import com.splendidbits.peacock.model.Item
+import kotlinx.android.synthetic.main.fragment_trending.*
 import javax.inject.Inject
 
 
 class TrendingFragment : Fragment() {
+    private val lifecycleObserver = FragmentLifecycleObserver()
+
     @Inject
     lateinit var repository: NewsRepository
 
     @Inject
     lateinit var recyclerAdapter: TrendingRecyclerAdapter
-
-    private val lifecycleObserver = FragmentLifecycleObserver()
 
     override fun onStart() {
         lifecycle.addObserver(lifecycleObserver)
@@ -41,6 +43,15 @@ class TrendingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        swipeRefreshLayout.isRefreshing = true
+        swipeRefreshLayout.setColorSchemeResources(R.color.peacock_orange, R.color.peacock_maroon, R.color.peacock_blue)
+        swipeRefreshLayout.setOnRefreshListener (object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                lifecycleObserver.loadTrendingItems()
+            }
+        })
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.trendingRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = recyclerAdapter
@@ -52,8 +63,9 @@ class TrendingFragment : Fragment() {
             repository.getLatestBatch().observe(this@TrendingFragment, Observer {
 
                 Log.d(this.javaClass.simpleName, "Loaded ${it?.items?.size} articles")
-                if (it?.items != null && !it.items.isEmpty()) {
+                if (it != null) {
                     recyclerAdapter.submitList(it.items as MutableList<Item>)
+                    swipeRefreshLayout.isRefreshing = false
                 }
             })
         }

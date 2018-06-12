@@ -38,7 +38,6 @@ class PeacockApplication : MultiDexApplication() {
                     .enableDebugCheck(true)
                     .enableEmulatorCheck(true)
                     .enableGooglePlayLicensing(getString(R.string.app_licensing_key))
-                    .saveResultToSharedPreferences(securePreferences,"piracy_checker_preferences")
                     .start()
         }
     }

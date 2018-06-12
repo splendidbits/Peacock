@@ -21,7 +21,6 @@ class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso
     private val TYPE_ARTICLE: Int = 1
     private val TYPE_VIDEO: Int = 2
     private val TYPE_FEATURED: Int = 3
-    private val imageHelper = ImageHelper()
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<Item>() {
@@ -29,7 +28,7 @@ class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso
                     oldItem.itemId == newItem.itemId
 
             override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean =
-                    oldItem == newItem
+                    oldItem.published == newItem.published
         }
     }
 
