@@ -44,8 +44,8 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
         }
 
         val json = root?.asJsonObject
-        batch.saved = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         val defaultDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        batch.saved = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         batch.updated = parseDate(json?.string("updated"), defaultDate)
 
         val items = json?.get("entries")?.asJsonArray() ?: JsonArray(0)
@@ -70,8 +70,8 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
                 newsItem.breaking = jsonItem.asJsonObject?.get("breaking_news")?.asBoolean ?: false
                 newsItem.section = jsonItem.string("section")
                 newsItem.subSection = jsonItem.string("subSection")
-                newsItem.published = parseDate(jsonItem.string("published"), batch.updated)
-                newsItem.publishedFirst = parseDate(jsonItem.string("published_first"), batch.updated)
+                newsItem.published = parseDate(jsonItem.string("published"), defaultDate)
+                newsItem.publishedFirst = parseDate(jsonItem.string("published_first"), defaultDate)
 
                 if (newsItem.breaking && firstBreakingItem > 0) {
                     firstBreakingItem = itemIndex
@@ -93,7 +93,7 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
                     }
                 }
 
-                newsItem.assets = getAssets(jsonItem, newsItem, batch.updated)
+                newsItem.assets = getAssets(jsonItem, newsItem, defaultDate)
 
                 if (!batch.items.contains(newsItem)) {
                     batch.items += newsItem
@@ -128,7 +128,6 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
         asset.saved = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         asset.width = jsonObject.get("width")?.asInt ?: 0
         asset.height = jsonObject.get("height")?.asInt ?: 0
-        asset.published = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         asset.published = parseDate(jsonObject.string("published"), defaultDate)
 
         if (jsonObject.string("type").toLowerCase() == "video") {
@@ -199,7 +198,6 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
         }
         return mediaAssets
     }
-
 
     private fun parseDate(dateString: String?, defaultDate: Calendar): Calendar {
         if (dateString != null && dateString.isNotEmpty()) {
