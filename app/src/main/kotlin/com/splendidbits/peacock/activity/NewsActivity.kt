@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.splendidbits.peacock.R
+import com.splendidbits.peacock.fragment.TrendingFragment
 import com.splendidbits.peacock.main.PeacockApplication
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -31,6 +32,10 @@ class NewsActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener({ item: MenuItem ->
             when {
                 item.itemId == R.id.navigationTrending -> {
+                    val currentFragment = navHost.childFragmentManager.fragments[0]
+                    if (currentFragment is TrendingFragment){
+                        currentFragment.scrollToTop()
+                    }
                 }
                 item.itemId == R.id.navigationExplore -> {
                 }

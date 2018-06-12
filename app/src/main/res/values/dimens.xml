@@ -6,14 +6,14 @@
 
     <dimen name="card_margin_start">8dp</dimen>
     <dimen name="card_margin_end">8dp</dimen>
-    <dimen name="card_margin_top">8dp</dimen>
-    <dimen name="card_margin_bottom">8dp</dimen>
+    <dimen name="card_margin_top">6dp</dimen>
+    <dimen name="card_margin_bottom">6dp</dimen>
 
-    <dimen name="card_breaking_elevation">1.5dp</dimen>
+    <dimen name="card_breaking_elevation">2dp</dimen>
     <dimen name="card_regular_elevation">0.75dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
-    <dimen name="card_minimum_height">100dp</dimen>
-    <dimen name="card_video_player_min_height">200dp</dimen>
+    <dimen name="card_regular_height">100dp</dimen>
+    <dimen name="video_player_height">200dp</dimen>
 
     <dimen name="pill_min_width">42dp</dimen>
     <dimen name="pill_corner_radius">14dp</dimen>

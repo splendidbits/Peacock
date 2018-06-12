@@ -48,15 +48,15 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
-        tools:context=".activity.NewsActivity"
-        tools:layout="@layout/fragment_trending"
         android:id="@+id/navHost"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/navigation_graph" />
+        app:navGraph="@navigation/navigation_graph"
+        tools:layout="@layout/fragment_trending"
+        tools:context=".activity.NewsActivity" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

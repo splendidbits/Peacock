@@ -75,8 +75,9 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
 
                 if (newsItem.breaking && firstBreakingItem != -1) {
                     firstBreakingItem = itemIndex
+                }
 
-                } else if (!newsItem.breaking && firstRegularItem != -1) {
+                if (!newsItem.breaking && firstRegularItem != -1) {
                     firstRegularItem = itemIndex
                 }
 
@@ -124,7 +125,7 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
                     firstBreakingItem != 0) {
                 Collections.swap(batch.items, firstRegularItem, firstBreakingItem)
 
-            } else if (firstBreakingItem != -1 && firstRegularItem != -1) {
+            } else {
                 batch.items[0].featured = true
             }
         }

@@ -33,8 +33,9 @@
         <item name="android:background">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.CardView">
+    <style name="AppTheme.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="android:clickable">true</item>
+        <item name="android:background">@android:color/white</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="android:layout_marginStart">@dimen/card_margin_start</item>

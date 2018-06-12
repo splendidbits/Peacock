@@ -24,6 +24,7 @@ import javax.inject.Inject
 
 class TrendingFragment : Fragment() {
     private val lifecycleObserver = FragmentLifecycleObserver()
+    private var recyclerView: RecyclerView? = null
 
     @Inject
     lateinit var repository: NewsRepository
@@ -44,6 +45,10 @@ class TrendingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        recyclerView = view.findViewById<RecyclerView>(R.id.trendingRecyclerView)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        recyclerView?.adapter = recyclerAdapter
+
         swipeRefreshLayout.isRefreshing = true
         swipeRefreshLayout.setDistanceToTriggerSync(200)
         swipeRefreshLayout.setColorSchemeResources(R.color.peacock_orange, R.color.peacock_maroon, R.color.peacock_purple)
@@ -52,10 +57,10 @@ class TrendingFragment : Fragment() {
                 lifecycleObserver.loadTrendingItems()
             }
         })
+    }
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.trendingRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = recyclerAdapter
+    fun scrollToTop() {
+        recyclerView?.smoothScrollToPosition(0)
     }
 
     inner class FragmentLifecycleObserver : LifecycleObserver {
