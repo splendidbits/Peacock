@@ -11,7 +11,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ApplicationModule::class, DataModule::class, ComponentModule::class])
 interface AppComponent {
-
     fun inject(application: PeacockApplication)
 
     fun inject(newsActivity: NewsActivity)
