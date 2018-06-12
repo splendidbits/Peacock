@@ -2,8 +2,10 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardView"
     style="@style/AppTheme.CardView"
+    android:id="@+id/cardView"
+    app:cardElevation="@dimen/card_regular_elevation"
+    android:elevation="@dimen/card_regular_elevation"
     android:layout_width="match_parent"
     android:layout_height="@dimen/card_minimum_height">
 

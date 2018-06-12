@@ -4,10 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.google.gson.GsonBuilder
 import com.splendidbits.peacock.R
 import com.splendidbits.peacock.adapter.NewsItemsDeserializer
+import com.splendidbits.peacock.helper.map
 import com.splendidbits.peacock.model.Batch
 import com.splendidbits.peacock.service.RemoteApiService
 import com.splendidbits.peacock.service.RetrofitLiveData
@@ -27,22 +28,21 @@ class NewsRepository(val context: Context, private val okHttpClient: OkHttpClien
     }
 
     private fun getSavedTrending(): LiveData<Batch?> {
-        val liveData = MutableLiveData<Batch>()
-//        val batchLiveData = Transformations.switchMap(articlesDao.getLatestBatch(), { batch ->
-//            articlesDao.getItems(batch?.batchId)
-//                    .map {
-//                        batch?.items = it
-//                        batch
-//                    }
-//        })
-        return liveData
+        val batchLiveData = Transformations.switchMap(articlesDao.getLatestBatch(), { batch ->
+            articlesDao.getItems(batch?.batchId)
+                    .map {
+                        batch?.items = it
+                        batch
+                    }
+        })
+        return batchLiveData
     }
 
     fun getLatestBatch(): LiveData<Batch> {
         val liveDataMerger = MediatorLiveData<Batch>()
-        liveDataMerger.addSource(getSavedTrending(), {
-            liveDataMerger.setValue(it)
-        })
+//        liveDataMerger.addSource(getSavedTrending(), {
+//            liveDataMerger.setValue(it)
+//        })
         liveDataMerger.addSource(getLiveTrending(), {
             liveDataMerger.setValue(it)
         })

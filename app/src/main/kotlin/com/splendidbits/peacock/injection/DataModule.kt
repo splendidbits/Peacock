@@ -9,6 +9,7 @@ import com.splendidbits.peacock.service.NewsDatabase
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import javax.inject.Singleton
 import javax.net.ssl.SSLSession
 
@@ -32,6 +33,15 @@ class DataModule {
         val feedSslContext = SslUtils.getSslContextForCertificateFile(context, "0strings.xml")
 
         okHttpClientBuilder
+                .protocols(listOf(Protocol.HTTP_1_1))
+                .addInterceptor({ chain ->
+                    val request = chain.request()
+                            .newBuilder()
+                            .addHeader("Connection", "keep-alive")
+                            .build()
+
+                    chain.proceed(request)
+                })
                 .sslSocketFactory(feedSslContext.getSocketFactory())
                 .hostnameVerifier({ _: String, session: SSLSession ->
                     session.peerHost.contains("devicestransform-stg.elasticbeanstalk.com")

@@ -45,7 +45,8 @@ class TrendingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefreshLayout.isRefreshing = true
-        swipeRefreshLayout.setColorSchemeResources(R.color.peacock_orange, R.color.peacock_maroon, R.color.peacock_blue)
+        swipeRefreshLayout.setDistanceToTriggerSync(200)
+        swipeRefreshLayout.setColorSchemeResources(R.color.peacock_orange, R.color.peacock_maroon, R.color.peacock_purple)
         swipeRefreshLayout.setOnRefreshListener (object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 lifecycleObserver.loadTrendingItems()

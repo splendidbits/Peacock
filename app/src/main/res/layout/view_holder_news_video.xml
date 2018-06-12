@@ -51,6 +51,7 @@
             <LinearLayout
                 android:id="@+id/videoVolumePill"
                 style="@style/AppTheme.Pill"
+                android:visibility="gone"
                 android:alpha="0.7"
                 android:elevation="0dp"
                 android:orientation="horizontal"

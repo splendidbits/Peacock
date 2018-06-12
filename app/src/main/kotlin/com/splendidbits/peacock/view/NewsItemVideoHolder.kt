@@ -62,7 +62,9 @@ class NewsItemVideoHolder(itemView: View) : AbstractNewsItemHolder(itemView), To
     }
 
     override fun isPlaying(): Boolean {
-        return exoPlayerHelper?.isPlaying ?: false
+        val isPlaying = exoPlayerHelper?.isPlaying ?: false
+        pillText.visibility = if (isPlaying) View.VISIBLE else View.GONE
+        return isPlaying
     }
 
     override fun getPlayerView(): View {

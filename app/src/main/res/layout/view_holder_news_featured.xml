@@ -6,7 +6,9 @@
     style="@style/AppTheme.CardView"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/card_breaking_elevation"
+    android:elevation="@dimen/card_breaking_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

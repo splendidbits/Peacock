@@ -2,7 +2,6 @@ package com.splendidbits.peacock.injection
 
 import android.content.Context
 import com.mklimek.sslutilsandroid.SslUtils
-import com.splendidbits.peacock.BuildConfig
 import com.splendidbits.peacock.R
 import com.squareup.picasso.LruCache
 import com.squareup.picasso.OkHttp3Downloader
@@ -18,7 +17,7 @@ import javax.net.ssl.SSLSession
 
 @Module
 class ComponentModule {
-    private val userAgent = "peacock/${BuildConfig.VERSION_NAME}"
+    private val userAgent = "okhttp/3.8.1"
 
     @Provides
     @Singleton

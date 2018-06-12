@@ -3,7 +3,6 @@ package com.splendidbits.peacock.adapter
 import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -28,7 +27,7 @@ class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso
                     oldItem.itemId == newItem.itemId
 
             override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean =
-                    oldItem.published == newItem.published
+                    oldItem.itemId == newItem.itemId
         }
     }
 
@@ -88,7 +87,6 @@ class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso
             if (item.hasVideo()) {
                 viewHolder.videoUri = Uri.parse(item.assets.getFirstVideoUrl())
             }
-            viewHolder.pillText.visibility = View.VISIBLE
             viewHolder.summaryText.text = item.summary
 
             if (item.hasImage()) {
