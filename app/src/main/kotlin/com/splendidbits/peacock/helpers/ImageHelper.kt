@@ -12,8 +12,8 @@ private const val FOCAL_ATTRIBUTES_EXTENSION: String = ".focal-1000x500"
 class ImageHelper {
     val sharpness = 7 // scale is 1-7
     val quality = 100 // percentage
-    val IMAGE_THUMBNAIL_SIZE_WIDTH: Int = 384
-    val IMAGE_THUMBNAIL_SIZE_HEIGHT: Int = 384
+    val IMAGE_THUMBNAIL_SIZE_WIDTH: Int = 256
+    val IMAGE_THUMBNAIL_SIZE_HEIGHT: Int = 256
     val IMAGE_HERO_SIZE_WIDTH: Int = 1080
     val IMAGE_HERO_SIZE_HEIGHT: Int = 720
 
@@ -55,6 +55,7 @@ class ImageHelper {
                 val width = IMAGE_THUMBNAIL_SIZE_WIDTH
                 val height = IMAGE_THUMBNAIL_SIZE_HEIGHT
                 val mode = ResizeMode.CROP_CENTER
+                val quality = 70
 
                 revertUrlToOriginal(url, fileExtension)
                         .replace(DOMAIN_ORIGINAL, DOMAIN_RESIZABLE)
