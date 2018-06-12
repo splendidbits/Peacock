@@ -37,8 +37,8 @@ android {
     defaultConfig {
         applicationId "com.splendidbits.peacock"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        versionCode = 8
-        versionName = "1.1.7"
+        versionCode = 9
+        versionName = "1.1.8"
 
         compileSdkVersion 28
         targetSdkVersion 28
@@ -53,9 +53,9 @@ android {
 
     signingConfigs {
         release {
-            keyAlias "peacock"
-            keyPassword "peacock"
-            storeFile file("../peacock.keystore")
+            keyAlias "peacock-release"
+            keyPassword "bg8j7tZ5"
+            storeFile file("../peacock-release.keystore")
             storePassword "bg8j7tZ5"
         }
         debug {
@@ -91,18 +91,16 @@ android {
         release {
             signingConfig signingConfigs.release
             debuggable false
-            shrinkResources true
-            zipAlignEnabled true
             minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix " debug"
             debuggable true
-            shrinkResources false
-            zipAlignEnabled false
             minifyEnabled false
+            useProguard false
         }
     }
 }

@@ -1,3 +1,7 @@
+# Annotations
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+
 # OkHttp and Okio
 -dontwarn okhttp3.**
 -dontwarn okio.**
@@ -5,8 +9,6 @@
 -keep class com.squareup.okhttp3.** { *;}
 -dontwarn okio.**
 -keep interface com.squareup.okhttp3.** { *; }
--dontwarn javax.annotation.Nullable
--dontwarn javax.annotation.ParametersAreNonnullByDefault
 -dontwarn org.conscrypt.**
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
@@ -18,7 +20,7 @@
 # Exoplayer
 -dontwarn com.google.android.exoplayer2.**
 
-## Google Play Services 4.3.23 specific rules ##
+## Google Play Services (GMS)
 ## https://developer.android.com/google/play-services/setup.html#Proguard ##
 -keep class * extends java.util.ListResourceBundle {
     protected Object[][] getContents();
@@ -34,12 +36,12 @@
     public static final ** CREATOR;
 }
 
-# Gson specific classes
+# Gson
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 -keeppackagenames org.jsoup.nodes
 
-# RxJava 0.21
+# RxJava
 -keep class rx.schedulers.Schedulers {
     public static <methods>;
 }
@@ -53,7 +55,7 @@
     public static ** test();
 }
 
-# Dagger ProGuard rules.
+# Dagger
 # https://github.com/square/dagger
 -dontwarn dagger.internal.codegen.**
 -keepclassmembers,allowobfuscation class * {
@@ -77,18 +79,22 @@
     @retrofit2.http.* <methods>;
 }
 
-# Google Support libraries
-# todo: remove
--keep class * extends android.support.v4.app.Fragment{}
+# Peacock code TODO remove
+-keep class * extends androidx.appcompat.app.AppCompatActivity
+-keep class * extends androidx.fragment.app.Fragment
 
--dontwarn android.support.design.**
--keep class android.support.design.** { *; }
--keep interface android.support.design.** { *; }
--keep public class android.support.design.R$* { *; }
--keep public class android.support.v7.widget.** { *; }
--keep public class android.support.v7.internal.widget.** { *; }
--keep public class android.support.v7.internal.view.menu.** { *; }
--keep public class * extends android.support.v4.view.ActionProvider {
+# androidx.* libraries
+-keep public class com.google.android.material.R$* { *; }
+
+-dontwarn com.google.android.material.**
+-keep class com.google.android.material.** { *; }
+-keep class androidx.** { *; }
+-keep interface androidx.** { *; }
+-keep public class androidx.appcompat.** { *; }
+-keep public class androidx.recyclerview.widget.** { *; }
+-keep public class androidx.core.internal.widget.** { *; }
+-keep public class androidx.core.internal.view.menu.** { *; }
+-keep public class * extends androidx.core.internal.view.ActionProvider {
     public <init>(android.content.Context);
 }
--keep class android.support.v7.widget.RoundRectDrawable { *; }
+-keep class androidx.recyclerview.widget { *; }

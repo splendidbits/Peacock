@@ -1,8 +1,7 @@
 package com.splendidbits.peacock.main
 
-import android.app.Application
 import android.content.SharedPreferences
-import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import com.github.javiersantos.piracychecker.PiracyChecker
 import com.github.javiersantos.piracychecker.enums.InstallerID
 import com.splendidbits.peacock.BuildConfig
@@ -11,7 +10,7 @@ import com.splendidbits.peacock.injection.*
 import javax.inject.Inject
 
 
-class PeacockApplication : Application() {
+class PeacockApplication : MultiDexApplication() {
     @Inject
     lateinit var securePreferences: SharedPreferences
 
@@ -22,7 +21,6 @@ class PeacockApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        MultiDex.install(this)
 
         graph = DaggerAppComponent
                 .builder()
