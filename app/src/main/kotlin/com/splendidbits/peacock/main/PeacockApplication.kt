@@ -7,6 +7,7 @@ import com.github.javiersantos.piracychecker.enums.InstallerID
 import com.splendidbits.peacock.BuildConfig
 import com.splendidbits.peacock.R
 import com.splendidbits.peacock.injection.*
+import com.squareup.leakcanary.LeakCanary
 import javax.inject.Inject
 
 
@@ -22,13 +23,17 @@ class PeacockApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
+
         graph = DaggerAppComponent
                 .builder()
                 .componentModule(ComponentModule())
                 .applicationModule(ApplicationModule(this))
                 .dataModule(DataModule())
                 .build()
-
         graph.inject(this)
 
         if (!BuildConfig.DEBUG) {
