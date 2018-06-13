@@ -21,10 +21,10 @@ class NewsRepository(val context: Context, private val okHttpClient: OkHttpClien
     private fun getLiveTrending(): LiveData<Batch> {
         val retrofitCall = create(context.getString(R.string.latest_feed_url)).getCoverItems()
         return RetrofitLiveData(retrofitCall)
-                .map { batch: Batch ->
-                    saveBatch(batch)
-                    batch
-                }
+//                .map { batch: Batch ->
+//                    saveBatch(batch)
+//                    batch
+//                }
     }
 
     private fun getSavedTrending(): LiveData<Batch?> {

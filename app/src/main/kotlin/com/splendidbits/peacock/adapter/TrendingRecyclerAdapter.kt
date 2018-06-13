@@ -84,9 +84,7 @@ class TrendingRecyclerAdapter(val context: Context, private val picasso: Picasso
         }
 
         if (viewHolder is NewsItemVideoHolder) {
-            if (item.hasVideo()) {
-                viewHolder.videoUri = Uri.parse(item.assets.getFirstVideoUrl())
-            }
+            viewHolder.videoUri = Uri.parse(item.assets.getFirstVideoUrl())
             viewHolder.summaryText.text = item.summary
 
             if (item.hasImage()) {

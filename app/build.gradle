@@ -12,7 +12,7 @@ ext {
     dagger_version = "2.16"
     retrofit_version = "2.4.0"
     toro_version = "3.5.2"
-    stetho_version = "1.5.0"
+    exoplayer_version = "2.7.3"
 }
 
 buildscript {
@@ -154,7 +154,8 @@ dependencies {
 
     implementation "im.ene.toro3:toro:${toro_version}"
     implementation "im.ene.toro3:toro-ext-exoplayer:${toro_version}"
-    implementation "com.google.android.exoplayer:exoplayer:2.7.3"
+    implementation "com.google.android.exoplayer:exoplayer-core:${exoplayer_version}"
+    implementation "com.google.android.exoplayer:exoplayer-hls:${exoplayer_version}"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"

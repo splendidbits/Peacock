@@ -5,6 +5,7 @@ import com.splendidbits.peacock.adapter.TrendingRecyclerAdapter
 import com.splendidbits.peacock.fragment.ArticleFragment
 import com.splendidbits.peacock.fragment.TrendingFragment
 import com.splendidbits.peacock.main.PeacockApplication
+import com.splendidbits.peacock.view.NewsItemVideoHolder
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,5 +20,5 @@ interface AppComponent {
     fun inject(fragment: ArticleFragment)
 
     fun inject(recyclerAdapter: TrendingRecyclerAdapter)
-
+    fun inject(viewHolder: NewsItemVideoHolder)
 }
