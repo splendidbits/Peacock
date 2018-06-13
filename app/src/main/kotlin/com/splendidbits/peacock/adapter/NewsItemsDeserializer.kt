@@ -47,6 +47,9 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
         val defaultDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         batch.saved = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         batch.updated = parseDate(json?.string("updated"), defaultDate)
+        batch.title = json?.string("title") ?: StringUtils.EMPTY
+        batch.orgName = "nbcnews"
+        batch.orgUrl = "https://www.nbcnews.com/"
 
         val items = json?.get("entries")?.asJsonArray() ?: JsonArray(0)
         var firstBreakingItem = -1
@@ -55,6 +58,7 @@ class NewsItemsDeserializer(appContext: Context) : JsonDeserializer<Batch> {
             Log.d(this::class.java.simpleName, "Found item index $itemIndex")
 
             if (jsonItem is JsonObject) {
+                // Boy, do nbc publish a lot of shit. Remove this entry.
                 if (jsonItem.string("articleType").toLowerCase() == "externallink") {
                     continue
                 }

@@ -9,6 +9,7 @@ ext {
     lifecycle_version = "2.0.0-alpha1"
     room_version = "2.0.0-alpha1"
     nav_version = "1.0.0-alpha02"
+    constraintlayout_version = "1.1.2"
     dagger_version = "2.16"
     retrofit_version = "2.4.0"
     toro_version = "3.5.2"
@@ -107,8 +108,7 @@ android {
 
 configurations {
     implementation {
-        //exclude group: "androidx.recyclerview", module: "recyclerview"
-        //exclude group: "androidx.core.os", module: "ResultReceiver"
+//        exclude group: "com.android"
     }
 }
 
@@ -121,8 +121,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${androidx_version}"
     implementation "androidx.browser:browser:${androidx_version}"
     implementation "androidx.legacy:legacy-support-v4:${androidx_version}"
-    implementation "androidx.constraintlayout:constraintlayout:1.1.2"
-    implementation "androidx.constraintlayout:constraintlayout-solver:1.1.2"
+    implementation "androidx.constraintlayout:constraintlayout:${constraintlayout_version}"
+    implementation "androidx.constraintlayout:constraintlayout-solver:${constraintlayout_version}"
 
     implementation "androidx.lifecycle:lifecycle-livedata:${lifecycle_version}"
 
@@ -160,8 +160,8 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Required for local unit tests (JUnit 4 framework)
     testImplementation "junit:junit:4.12"

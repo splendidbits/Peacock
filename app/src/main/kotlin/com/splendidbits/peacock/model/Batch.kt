@@ -12,6 +12,8 @@ import java.util.*
 @Entity(tableName = "batches", primaryKeys = ["batchId"])
 data class Batch(var batchId: String = StringUtils.EMPTY,
                  var title: String = StringUtils.EMPTY,
+                 var orgName: String = StringUtils.EMPTY,
+                 var orgUrl: String = StringUtils.EMPTY,
                  var updated: Calendar = Calendar.getInstance(),
                  @Ignore
                  var items: List<Item> = mutableListOf(),

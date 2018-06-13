@@ -45,7 +45,7 @@ class TrendingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.trendingRecyclerView)
+        recyclerView = view.findViewById(R.id.trendingRecyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.adapter = recyclerAdapter
 

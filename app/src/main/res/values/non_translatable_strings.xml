@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string translatable="false" name="app_name">Peacock</string>
     <string translatable="false" name="latest_feed_url">https://devicestransform-stg.elasticbeanstalk.com</string>
     <string translatable="false" name="latest_feed_images_url">s-nbcnews.com</string>
     <string translatable="false" name="latest_feed_date_format">"yyyy-MM-dd'T'HH:mm:ss'Z'"</string>

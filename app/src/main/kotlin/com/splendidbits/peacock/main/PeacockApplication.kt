@@ -5,7 +5,6 @@ import androidx.multidex.MultiDexApplication
 import com.github.javiersantos.piracychecker.PiracyChecker
 import com.github.javiersantos.piracychecker.enums.InstallerID
 import com.splendidbits.peacock.BuildConfig
-import com.splendidbits.peacock.R
 import com.splendidbits.peacock.injection.*
 import com.squareup.leakcanary.LeakCanary
 import javax.inject.Inject
@@ -42,7 +41,6 @@ class PeacockApplication : MultiDexApplication() {
                     .enableUnauthorizedAppsCheck(true)
                     .enableDebugCheck(true)
                     .enableEmulatorCheck(true)
-                    .enableGooglePlayLicensing(getString(R.string.app_licensing_key))
                     .start()
         }
     }

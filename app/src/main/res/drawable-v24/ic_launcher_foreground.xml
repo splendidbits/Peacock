@@ -4,7 +4,7 @@
     android:height="108dp"
     android:viewportWidth="1010.4167"
     android:viewportHeight="1010.4167">
-    <group android:translateX="262.70834"
+    <group android:translateX="310"
         android:translateY="280.61979">
         <path
             android:fillType="evenOdd"

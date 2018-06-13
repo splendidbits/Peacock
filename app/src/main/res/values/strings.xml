@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Peacock</string>
-
     <string name="fragment_trending">Trending</string>
     <string name="fragment_explore">Explore</string>
     <string name="fragment_saved">Saved</string>
