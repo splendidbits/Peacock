@@ -1,5 +1,8 @@
+# Secrets
+*.secret
+*.cer
+
 # Android Build Stuff
-###################
 *.class
 *.apk
 *.aab
@@ -20,12 +23,10 @@ app/release
 .gradle
 local.properties
 
-# OS X Stuff
-###################
+# macOS Stuff
 *.DS_Store
 
 # Compiled source #
-###################
 *.com
 *.class
 *.dll
@@ -34,7 +35,6 @@ local.properties
 *.so
 
 # Packages #
-############
 # it's better to unpack these files and commit the raw source
 # git has its own built in compression methods
 *.7z
@@ -45,12 +45,11 @@ local.properties
 *.tar
 *.zip
 
-# Logs
-######################
+# Logs and generated text
 *.log
+*.hprof
 
 # OS generated files #
-######################
 .DS_Store?
 ehthumbs.db
 Icon?
