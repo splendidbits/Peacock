@@ -41,10 +41,10 @@ android {
     buildToolsVersion "28.0.2"
 
     defaultConfig {
-        applicationId "com.splendidbits.peacocknews"
+        applicationId "com.splendidbits.peacock"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        versionCode = 14
-        versionName = "1.1.14"
+        versionCode = 21
+        versionName = "1.1"
 
         compileSdkVersion 28
         targetSdkVersion 28

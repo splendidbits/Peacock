@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/trendingFragment"
-        android:name="com.splendidbits.peacocknews.fragment.TrendingFragment"
+        android:name="com.splendidbits.peacock.fragment.TrendingFragment"
         android:label="@string/fragment_trending"
         tools:layout="@layout/fragment_trending" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/readFragment"
-        android:name="com.splendidbits.peacocknews.fragment.ArticleFragment"
+        android:name="com.splendidbits.peacock.fragment.ArticleFragment"
         android:label="@string/fragment_article"
         tools:layout="@layout/fragment_article" />
 </navigation>

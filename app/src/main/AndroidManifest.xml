@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:tools="http://schemas.android.com/tools"
-    package="com.splendidbits.peacocknews"
+    package="com.splendidbits.peacock"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.splendidbits.peacocknews.main.PeacockApplication"
+        android:name="com.splendidbits.peacock.main.PeacockApplication"
         android:allowBackup="true"
         android:appCategory="news"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -22,7 +22,7 @@
 
         <activity-alias
             android:name="LauncherActivity"
-            android:targetActivity="com.splendidbits.peacocknews.activity.NewsActivity">
+            android:targetActivity="com.splendidbits.peacock.activity.NewsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,7 +30,7 @@
         </activity-alias>
 
         <activity
-            android:name="com.splendidbits.peacocknews.activity.NewsActivity"
+            android:name="com.splendidbits.peacock.activity.NewsActivity"
             android:theme="@style/AppTheme" />
     </application>
 
