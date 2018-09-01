@@ -43,8 +43,8 @@ android {
     defaultConfig {
         applicationId "com.splendidbits.peacock"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        versionCode = 21
-        versionName = "1.1"
+        versionCode = 22
+        versionName = "1.1.1"
 
         compileSdkVersion 28
         targetSdkVersion 28
