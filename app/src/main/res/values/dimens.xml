@@ -12,7 +12,7 @@
     <dimen name="card_breaking_elevation">2dp</dimen>
     <dimen name="card_regular_elevation">0.75dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
-    <dimen name="card_regular_height">100dp</dimen>
+    <dimen name="card_regular_height">90dp</dimen>
     <dimen name="video_player_height">200dp</dimen>
 
     <dimen name="pill_min_width">42dp</dimen>

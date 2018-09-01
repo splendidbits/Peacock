@@ -36,10 +36,10 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/toolbarLogo"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
+                    android:layout_width="42dp"
+                    android:layout_height="19dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/toolbar_logo"/>
+                    android:src="@drawable/ic_peacock_rainbow"/>
 
             </androidx.appcompat.widget.Toolbar>
 
