@@ -56,3 +56,10 @@ local.properties
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# Secure 
+peacock.secret?
+private_key.pepk.secret?
+
+
+
