@@ -1,7 +1,7 @@
 package com.splendidbits.peacock.main
 
+import android.app.Application
 import android.content.SharedPreferences
-import androidx.multidex.MultiDexApplication
 import com.github.javiersantos.piracychecker.PiracyChecker
 import com.github.javiersantos.piracychecker.enums.InstallerID
 import com.splendidbits.peacock.BuildConfig
@@ -9,7 +9,7 @@ import com.splendidbits.peacock.injection.*
 import javax.inject.Inject
 
 
-class PeacockApplication : MultiDexApplication() {
+class PeacockApplication : Application() {
     @Inject
     lateinit var securePreferences: SharedPreferences
 
