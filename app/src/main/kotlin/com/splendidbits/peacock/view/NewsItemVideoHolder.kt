@@ -3,7 +3,7 @@ package com.splendidbits.peacock.view
 import android.content.Context
 import android.net.Uri
 import android.view.View
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.video.VideoListener
 import com.splendidbits.peacock.main.PeacockApplication
 import im.ene.toro.ToroPlayer
@@ -25,7 +25,7 @@ class NewsItemVideoHolder(itemView: View) : AbstractNewsItemHolder(itemView), To
 
     private val videoPlayerContainer = itemView.videoPlayerContainer
     private var exoPlayerHelper: ExoPlayerViewHelper? = null
-    private val videoPlayerView: SimpleExoPlayerView = itemView.videoPlayer
+    private val videoPlayerView: PlayerView = itemView.videoPlayer
     private var videoOverlayPill = itemView.videoVolumePill
     val summaryText = itemView.summary
 
